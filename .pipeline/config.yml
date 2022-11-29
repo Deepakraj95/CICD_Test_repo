@@ -1,0 +1,44 @@
+---
+general:
+  buildTool: "mta"
+
+stages:
+  Build:
+    mavenExecuteStaticCodeChecks: false
+    npmExecuteLint: false
+
+  Additional Unit Tests:
+    npmExecuteScripts: false
+    karmaExecuteTests: false
+
+  Acceptance:
+    cloudFoundryDeploy: false
+    cfApiEndpoint: "https://api.cf.us10-001.hana.ondemand.com"
+    cfOrg: "768b3429trial"
+    cfSpace: "dev"
+    cfAppName: "app"
+    cfCredentialsId: "credentials"
+    uiVeri5ExecuteTests: false
+
+  Release:
+    cloudFoundryDeploy: true
+    cfApiEndpoint: "https://api.cf.us10-001.hana.ondemand.com"
+    cfOrg: "768b3429trial"
+    cfSpace: "dev"
+    cfAppName: "app"
+    cfCredentialsId: "credentials"
+    tmsUpload: true
+
+steps:
+  artifactPrepareVersion:
+    versioningType: "cloud_noTag"
+
+  npmExecuteLint:
+    failOnError: true
+
+  cloudFoundryDeploy:
+    mtaDeployParameters: "-f --version-rule ALL"
+
+  tmsUpload:
+    nodeName: "Piper_CTM"
+    credentialsId: "ctm-service-key"
