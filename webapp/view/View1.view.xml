@@ -1,0 +1,39 @@
+<mvc:View controllerName="package.AiPackaging.controller.View1" xmlns:mvc="sap.ui.core.mvc" xmlns:uni="sap.ui.unified" displayBlock="true"
+	xmlns="sap.m">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" showHeader="false">
+					<Bar>
+						<contentLeft>
+							<Image src="images/cg.png" width="8rem" class="sapUiTinyMarginBegin"/>
+						</contentLeft>
+						<contentMiddle>
+							<Title text="Intelligent Packaging - Powered by ML"/>
+						</contentMiddle>
+						<contentRight></contentRight>
+					</Bar>
+					<content>
+						<HBox class="sapUiLargeMarginTop" justifyContent="Center" height="100%" width="100%">
+							<GenericTile class="sapUiLargeMarginTop" header="Print Quality Inspection" press="print">
+								<TileContent>
+									<ImageContent class="sapUiSmallMarginTop" src="sap-icon://detail-view"/>
+								</TileContent>
+							</GenericTile>
+							<GenericTile class="sapUiLargeMarginBegin sapUiLargeMarginTop" header="Vision Counting" press="count">
+								<TileContent>
+									<ImageContent class="sapUiSmallMarginTop" src="sap-icon://number-sign"/>
+								</TileContent>
+							</GenericTile>
+							<GenericTile class="sapUiLargeMarginBegin sapUiLargeMarginTop" header="Material recommendation" press="pack">
+								<TileContent>
+									<ImageContent class="sapUiSmallMarginTop" src="sap-icon://favorite"/>
+								</TileContent>
+							</GenericTile>
+						</HBox>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

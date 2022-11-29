@@ -1,0 +1,48 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:uni="sap.ui.unified" controllerName="package.AiPackaging.controller.vision"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page showHeader="false">
+				<content>
+					<Bar>
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" class="sapUiMediumMarginEnd" press="goback"/>
+						</contentLeft>
+						<contentMiddle>
+							<Title text="Vision Counting"/>
+						</contentMiddle>
+						<contentRight></contentRight>
+					</Bar>
+					<Panel width="auto" height="auto" class="sapUiResponsiveMargin">
+						<content>
+							<HBox justifyContent="SpaceBetween"><Text text="Use this tool to count the number of objects in a image"/>
+								<RadioButtonGroup id="viewtype" columns="5" class="sapUiMediumMarginBegin">
+									<RadioButton id="front" tooltip="use this for 2d view/ Image taken from front" text="Front View"/>
+									<RadioButton id="side" tooltip="use this for 3d view/ Image taken with some objects sideways" text="Side View"/>
+								</RadioButtonGroup>
+								<Button id="countcheck" text="Get Count" press="count"/>
+							</HBox>
+							<HBox>
+								<VBox width="50%" height="700px" class="image">
+									<HBox width="100%">
+									<uni:FileUploader id="countupload" iconOnly="false" buttonText="Upload Image" placeholder="Upload Image" multiple="false"
+										buttonOnly="true" icon="sap-icon://upload" uploadOnChange="true" useMultipart="false" fileType="JPG,JPEG,jpeg,jpg,PNG,png"
+										sameFilenameAllowed="true" change="onChangeCamera" uploadComplete="uploaded" class="sapUiTinyMarginBegin"/>
+									<Button id="countclick" text="Snap" icon="sap-icon://add-photo" press="opencam" class="sapUiSmallMarginBegin"/>
+									</HBox>
+									<Image src="images/test.png" id="countimg" width="100%" class="sapUiTinyMargin"/>
+								</VBox>
+								<VBox width="50%" height="700px" visible="false" class="sapUiMediumMarginBegin sapUiMediumMarginTop image" id="countopcontainer">
+									<Text class="header" text="Output" id="optext"/>
+									<Image id="countopimg" width="100%" class="sapUiTinyMargin"/>
+									<!--<Text class="sapUiLargeMarginTop" text="Count"/>-->
+									<Text class="sapUiLargeMarginTop" id="counttext"/>
+								</VBox>
+							</HBox>
+						</content>
+					</Panel>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

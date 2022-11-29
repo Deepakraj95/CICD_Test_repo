@@ -1,0 +1,64 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:uni="sap.ui.unified" xmlns:l="sap.ui.layout"
+	controllerName="package.AiPackaging.controller.defects" xmlns:chart="sap.suite.ui.microchart" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Title" showHeader="false">
+				<content>
+					<Bar>
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" class="sapUiMediumMarginEnd" press="goback"/>
+						</contentLeft>
+						<contentMiddle>
+							<Title text="Print Quality Inspection"/>
+						</contentMiddle>
+						<contentRight></contentRight>
+					</Bar>
+					<Panel width="auto" height="auto" class="sapUiResponsiveMargin">
+						<Text class="sapUiTinyMarginBegin " text="Use this tool to check defects in package printing"/>
+						<HBox width="100%">
+							<VBox width="50%" height="700px" class="sapUiMediumMarginTop " id="mastercont">
+								<HBox width="auto">
+									<Text text="Master Image" class="sapUiSmallMarginEnd"/>
+									<uni:FileUploader id="masterupload" class="sapUiSmallMarginEnd" iconOnly="false" buttonText="Upload Image" placeholder="Upload Image"
+										multiple="false" buttonOnly="true" icon="sap-icon://upload" uploadOnChange="true" useMultipart="false" fileType="JPG,JPEG,jpeg,jpg,PNG,png"
+										sameFilenameAllowed="true" change="onChangeCamera" uploadComplete="uploaded"/>
+									<Button id="masterclick" text="Capture Image" icon="sap-icon://add-photo" press="opencam"/>
+								</HBox>
+								<Image src="images/master.png" id="masterimg" width="100%" class="sapUiTinyMargin w3-image"/>
+							</VBox>
+							<VBox width="50%" class="sapUiMediumMarginBegin sapUiMediumMarginTop " height="700px" id="testcont">
+								<HBox width="auto">
+									<Text text="Test Image" class="sapUiSmallMarginEnd"/>
+									<uni:FileUploader class="sapUiSmallMarginEnd" id="testupload" iconOnly="false" buttonText="Upload Image" placeholder="Upload Image"
+										multiple="false" buttonOnly="true" icon="sap-icon://upload" uploadOnChange="true" useMultipart="false" fileType="JPG,JPEG,jpeg,jpg,PNG,png"
+										sameFilenameAllowed="true" uploadComplete="uploaded"/>
+									<Button id="testclick" text="Capture Image" icon="sap-icon://add-photo" press="opencam" class="sapUiLargeMarginEnd"/>
+									<Button id="print" text="Check print" press="printcheck" class="sapUiLargeMarginBegin"/>
+								</HBox>
+								<HBox width="100%">
+									<Image src="images/test.png" id="testimg" width="100%" class="sapUiTinyMargin sapUiTinyMarginBegin w3-image"/>
+								</HBox>
+								<HBox id="opcont" visible="false">
+									<l:HorizontalLayout>
+									<Text text="Score" class="sapUiTinyMargin sapUiLargeMarginTop font"/>	
+									<chart:RadialMicroChart id="score" size="L" percentage="0" valueColor="Good" class="sapUiSmallMargin" ></chart:RadialMicroChart>
+									</l:HorizontalLayout>
+								</HBox>
+							</VBox>
+						</HBox>
+						<HBox visible="false" class="sapUiMediumMarginTop" id="outputcontainer">
+							<VBox width="70%" class="sapUiSmallMarginEnd">
+								<Text text="Output" class="sapUiTinyMargin"/>
+								<Image id="defopimg" class="image"/>
+							</VBox>
+							<VBox width="30%" class="sapUiMediumMargin">
+								
+								<Text id="scop" class="sapUiTinyMargin"/>
+							</VBox>
+						</HBox>
+					</Panel>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

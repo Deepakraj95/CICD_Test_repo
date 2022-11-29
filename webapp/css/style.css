@@ -1,0 +1,29 @@
+#videoElement {
+    width: 350px;
+    height: 350px;
+    background-color: #666;
+}
+.image
+{
+	max-width: 100% !important;
+	max-height: auto !important;
+	object-fit: contain;
+}
+.sapUiGlobalBackgroundImage
+{
+	background-image: linear-gradient(to top, #2b0a3c, #2e154b, #2f1f5c, #2c2a6c, #24357d, #1e438c, #14519b, #005fa9, #0072b8, #0085c5, #0098d1, #12abdb); !important;
+}
+.sapUiGlobalBackgroundImageForce
+{
+	background-image: linear-gradient(to top, #2b0a3c, #2e154b, #2f1f5c, #2c2a6c, #24357d, #1e438c, #14519b, #005fa9, #0072b8, #0085c5, #0098d1, #12abdb); !important;
+}
+.header
+{
+	font-size: 20px !important;
+}
+.w3-image{max-width:100%;height:auto}
+.font
+{
+	font-size:20px;
+}
+

@@ -1,0 +1,135 @@
+{
+    "_version": "1.12.0",
+    "sap.app": {
+        "id": "package.AiPackaging",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "sourceTemplate": {
+            "id": "ui5template.basicSAPUI5ApplicationProject",
+            "version": "1.40.12",
+            "toolsId": "79ce51b3-8acf-48fb-bf9d-8af9e3ad290f"
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "resourceRoots": {
+            "openui5.camera": "./openui5/camera/"
+        },
+        "flexEnabled": false,
+        "rootView": {
+            "viewName": "package.AiPackaging.view.View1",
+            "type": "XML",
+            "async": true,
+            "id": "View1"
+        },
+        "dependencies": {
+            "minUI5Version": "1.65.6",
+            "libs": {
+                "sap.ui.layout": {},
+                "sap.ui.core": {},
+                "sap.m": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "package.AiPackaging.i18n.i18n"
+                }
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "package.AiPackaging.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "TargetView1",
+                    "pattern": "TargetView1",
+                    "target": [
+                        "TargetView1"
+                    ]
+                },
+                {
+                    "name": "defects",
+                    "pattern": "defects",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": [
+                        "defects"
+                    ]
+                },
+                {
+                    "name": "vision",
+                    "pattern": "vision",
+                    "titleTarget": "",
+                    "greedy": false,
+                    "target": [
+                        "vision"
+                    ]
+                }
+            ],
+            "targets": {
+                "TargetView1": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewName": "View1"
+                },
+                "defects": {
+                    "viewType": "XML",
+                    "viewName": "defects"
+                },
+                "vision": {
+                    "viewType": "XML",
+                    "viewName": "vision"
+                }
+            }
+        }
+    },
+    "sap.platform.hcp": {
+        "uri": "webapp",
+        "_version": "1.1.0"
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "package-AiPackaging"
+    }
+}
