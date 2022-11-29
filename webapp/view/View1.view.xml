@@ -9,7 +9,7 @@
 							<Image src="images/cg.png" width="8rem" class="sapUiTinyMarginBegin"/>
 						</contentLeft>
 						<contentMiddle>
-							<Title text="Intelligent Packaging - Powered by ML - Added new title"/>
+							<Title text="Intelligent Packaging - Powered by ML"/>
 						</contentMiddle>
 						<contentRight></contentRight>
 					</Bar>
