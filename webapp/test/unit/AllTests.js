@@ -1,5 +1,5 @@
 sap.ui.define([
-	"package/AiPackaging/test/unit/controller/View1.controller"
+	"package/AiPackaging/test/unit/model/formatter"
 ], function () {
 	"use strict";
 });

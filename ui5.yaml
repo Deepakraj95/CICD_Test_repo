@@ -8,18 +8,18 @@ server:
       afterMiddleware: compression
       configuration:
         ignoreCertError: false
-        backend:
-          - path: /sap
-            url: ""
-            destination: Tetrapak_defects
-          - path: /Tetrapak_defects
-            destination: Tetrapak_defects
-            url: ""
-            pathPrefix: /
-          - path: /Vision_counting
-            destination: Vision_counting
-            url: ""
-            pathPrefix: /
+        # backend:
+        #   - path: /sap
+        #     url: ""
+        #     destination: Tetrapak_defects
+        #   - path: /Tetrapak_defects
+        #     destination: Tetrapak_defects
+        #     url: ""
+        #     pathPrefix: /
+        #   - path: /Vision_counting
+        #     destination: Vision_counting
+        #     url: ""
+        #     pathPrefix: /
         ui5:
           path:
             - /resources
