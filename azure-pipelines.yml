@@ -1,0 +1,73 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+
+name: cd-openui5-sample-app
+resources:
+  containers:
+  - container: mta
+    image: 'ghcr.io/sap/mbtci-java11-node14:latest'
+    options: --user 0:0
+  - container: cfcli
+    image: 'ppiper/cf-cli'
+    options: --user 0:0 --privileged
+  - container: node
+    image: 'geekykaran/headless-chrome-node-docker:latest'
+    options: --privileged
+
+trigger:
+- master
+
+stages:
+- stage: build
+  displayName: Build MTA for SAP Cloud Platform
+  jobs:
+    - job: build
+      container: mta
+      steps:
+        - bash: 'mbt --platform cf --mtar MySampleApp.mtar -t . build'
+        - publish: $(System.DefaultWorkingDirectory)/.
+          artifact: WebApp
+
+# - stage: test
+#   displayName: Run Karma Test Suite
+#   jobs:
+#     - job: test
+#       pool:
+#         vmImage: 'ubuntu-latest'
+#       container: node
+#       steps:
+#         - bash: 'npm config set @sap:registry "https://npm.sap.com" && npm install && npm run-script test'
+#         - publish: $(System.DefaultWorkingDirectory)/.
+#           artifact: TestResult
+
+
+- stage: deploy
+  displayName: Deployment to SAP Cloud Platform (cf)
+  jobs:
+    - job: deploy
+      pool:
+        vmImage: 'ubuntu-latest'
+      container: cfcli
+      steps:
+        - download: current
+          artifact: WebApp 
+        - bash: 'cf login -u "S0023941915" -p "Permit#123" -a "
+https://api.cf.us10-001.hana.ondemand.com" -o "768b3429trial" -s "dev" && cf deploy $(Pipeline.Workspace)/WebApp/MySampleApp.mtar -f'
+
+- stage: upload
+  displayName: Upload to CTMS
+  jobs:
+    - job: upload
+      pool:
+        vmImage: 'ubuntu-latest'
+      container: cfcli
+      steps:
+        - download: current
+          artifact: WebApp
+        - bash: | 
+            TOKEN=$(curl -s -X POST -u "sb-4d09b0ff-35d0-4c06-9b21-f2d2e477a4cb!b99571|alm-ts-backend!b1603:nRzosXIYRddwpc9Nxj+l931Pe2Y=" -d "grant_type=client_credentials&response_type=token" https://768b3429trial.authentication.us10.hana.ondemand.com/oauth/token | sed -n '/ *"access_token": *"/ {s///; s/{//g ;s/".*//; p; }')
+            BODY=$(curl -s --location --request POST '<TMS Service Key uri>/v2/files/upload' --header "Authorization: Bearer $TOKEN" --header 'Cookie: JSESSIONID=D11A4F1DE5C6638B18925D58307B360D; __VCAP_ID__=8aa9e193-d2a1-492c-76bc-288a' --form 'file=@"$(Pipeline.Workspace)/WebApp/MySampleApp.mtar"' | awk -F ":" '{print $2}' | grep -Po "\\d+")
+            curl --location --request POST 'https://transport-service-app-backend.ts.cfapps.us10.hana.ondemand.com/v2/nodes/upload' --header 'Content-Type: application/json' --header "Authorization: Bearer $TOKEN" --header 'Cookie: JSESSIONID=D11A4F1DE5C6638B18925D58307B360D; __VCAP_ID__=8aa9e193-d2a1-492c-76bc-288a' --data-raw '{ "nodeName": "node_dev", "contentType": "MTA", "storageType": "FILE", "entries": [ { "uri": '"$BODY"' } ], "description": "desc", "namedUser": "user" }'
