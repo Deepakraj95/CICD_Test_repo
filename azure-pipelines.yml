@@ -54,8 +54,7 @@ stages:
       steps:
         - download: current
           artifact: WebApp 
-        - bash: 'cf login -u "S0023941915" -p "Permit#123" -a "
-https://api.cf.us10-001.hana.ondemand.com" -o "768b3429trial" -s "dev" && cf deploy $(Pipeline.Workspace)/WebApp/MySampleApp.mtar -f'
+        - bash: 'cf login -u "S0023941915" -p "Permit#123" -a "api.cf.us10-001.hana.ondemand.com" -o "768b3429trial" -s "dev" && cf deploy $(Pipeline.Workspace)/WebApp/MySampleApp.mtar -f'
 
 - stage: upload
   displayName: Upload to CTMS
